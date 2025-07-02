@@ -1,6 +1,6 @@
 import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { TaskDto } from './DTO/task.dto';
-import { TaskService } from './task.service';
+import { TaskService } from './Services/task.service';
 
 @Controller('task')
 export class TaskController {
@@ -15,5 +15,6 @@ export class TaskController {
     @Get('/:id')
     findById(@Param('id') id:string): TaskDto{
         const foundTask = this.taskService.filter(t => t.id === id);
+        return foundTask;
     }
 }
