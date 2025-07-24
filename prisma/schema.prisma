@@ -6,7 +6,6 @@
 
 generator client {
   provider = "prisma-client-js"
-  output   = "../generated/prisma"
 }
 
 datasource db {
@@ -23,13 +22,19 @@ model users {
 
 model Tasks {
   id              Int      @id @default(autoincrement())
-  title           String
+  tittle          String
   description     String
-  status          Int
+  status          TaskStatus @default(PENDING)
   expirationDate  DateTime
-  done            Boolean  @default(false)
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
   userId          Int
   user      users @relation(fields: [userId], references: [id])
+}
+
+
+
+enum TaskStatus{
+  PENDING
+  DONE
 }
