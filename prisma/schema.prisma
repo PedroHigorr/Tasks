@@ -23,9 +23,9 @@ model users {
 model Tasks {
   id              Int      @id @default(autoincrement())
   tittle          String
-  description     String
+  description     String?
   status          TaskStatus @default(PENDING)
-  expirationDate  DateTime
+  expirationDate  DateTime?
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
   userId          Int
