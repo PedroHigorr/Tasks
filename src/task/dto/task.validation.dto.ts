@@ -1,13 +1,12 @@
-import { Transform, Type } from "class-transformer";
-import { IsDateString, IsEnum, IsInt, IsNotEmpty, IsOptional, IsString, Length, MaxLength } from "class-validator";
+import { Transform } from "class-transformer";
+import { IsDateString, IsEnum, IsNotEmpty, IsOptional, IsString, IsUUID, Length, MaxLength } from "class-validator";
 import { TaskStatus } from '@prisma/client';
 
 
 export class IdValidator{
     @IsNotEmpty({message: "O campo id não pode estar em branco."})
-    @IsInt({message: "ID fornecido é um valor inválido."})
-    @Type(() => Number)
-    id: number
+    @IsUUID()
+    id: string
 }
 
 export class TaskDto {
@@ -30,9 +29,8 @@ export class TaskDto {
     expirationDate: Date;
 
     @IsNotEmpty()
-    @IsInt({message: "ID fornecido é um valor inválido."})
-    @Type(() => Number)
-    userId: number;
+    @IsUUID()
+    userId: string;
 }
 
 

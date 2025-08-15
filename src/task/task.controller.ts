@@ -1,7 +1,6 @@
 import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, Post, Put, Query } from '@nestjs/common';
 
 import { TaskService } from './services/task.service';
-import { UserDto } from './dto/task.dto';
 import { IdValidator, TaskDto, TasksValidator } from './dto/task.validation.dto';
 
 @Controller('task')
@@ -16,15 +15,6 @@ export class TaskController {
 
         return {message: "Task criada com sucesso. \n\n", res }
 
-    }
-
-    @Post('user')
-    @HttpCode(HttpStatus.CREATED)
-    async createUsers(@Body() user: UserDto){
-
-       const res = await this.taskService.CreateUser(user);
-        
-        return {message: "Usuário criado com sucesso. \n\n", res}
     }
 
     @Get('user/:id')

@@ -1,5 +1,4 @@
 import { Injectable } from '@nestjs/common';
-import { UserDto } from '../dto/task.dto';
 import { TaskRepository } from '../repository/task.repository';
 import { Prisma, TaskStatus } from '@prisma/client';
 import { TaskDto } from '../dto/task.validation.dto';
@@ -24,24 +23,14 @@ export class TaskService {
     
  }
 
- async CreateUser(user: UserDto){
-    
-    const data: Prisma.usersCreateInput = {
-        name: user.name,
-        email: user.email,
-    }
-    
-    return this.db.createUser(data);
- }
-
- async findTaskById(id: number){
+ async findTaskById(id: string){
 
     const taskById = await this.db.findTaskById(id);
 
     return taskById;
  }
 
- async findUserById( id: number){
+ async findUserById( id: string){
 
     const userById = await this.db.findUserById(id);
 
@@ -49,13 +38,13 @@ export class TaskService {
     
  }
 
- async updateTask(id: number, title, description, status){
+ async updateTask(id: string, title, description, status){
 
    return await this.db.updateTask(id, title, description, status);
    
  }
  
- async deleteTask(id: number){
+ async deleteTask(id: string){
 
    return await this.db.deleteTask(id);
 

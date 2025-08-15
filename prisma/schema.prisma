@@ -14,21 +14,22 @@ datasource db {
 }
 
 model users {
-  id        Int     @id @default(autoincrement())
+  id        String     @id @default(uuid()) @db.Uuid
+  password  String
   name      String
   email     String
   tasks     Tasks[]
 }
 
 model Tasks {
-  id              Int      @id @default(autoincrement())
+  id              String      @id @default(uuid()) @db.Uuid
   tittle          String
   description     String?
   status          TaskStatus @default(PENDING)
   expirationDate  DateTime?
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
-  userId          Int
+  userId          String   @db.Uuid
   user      users @relation(fields: [userId], references: [id])
 }
 

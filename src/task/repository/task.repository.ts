@@ -36,29 +36,8 @@ export class TaskRepository{
 
     };
 
-    async createUser(data: Prisma.usersCreateInput){
-        try{
 
-            await this.prisma.users.create({data})
-
-        }catch(e){
-            
-            if( e instanceof PrismaClientKnownRequestError ){
-
-                switch(e.code){
-                    case 'P2009':
-                        throw new BadRequestException('Dados obrigatórios ausentes.');
-                    default:
-                        throw new InternalServerErrorException('Erro ao criar o usuário');
-                }
-            }
-
-        throw new InternalServerErrorException('Erro inesperado ao criar Task. \n', e.message);
-
-        }
-    }
-
-    async findUserById(id: number){
+    async findUserById(id: string){
         
         try{
 
@@ -86,7 +65,7 @@ export class TaskRepository{
         }
     }
 
-    async findTaskById(id: number){
+    async findTaskById(id: string){
         
         try{
 
@@ -114,7 +93,7 @@ export class TaskRepository{
         }
     }
 
-    async updateTask(id: number, tittle: string, description: string, status: TaskStatus){
+    async updateTask(id: string, tittle: string, description: string, status: TaskStatus){
 
         try {
             
@@ -142,7 +121,7 @@ export class TaskRepository{
         }
     }
 
-    async deleteTask(id: number){
+    async deleteTask(id: string){
 
         try {
 
