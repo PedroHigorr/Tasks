@@ -22,11 +22,7 @@ export class TaskRepository{
                     case 'P2002':
                         throw new ConflictException('Task já existe.');
                     case 'P2003':
-                        throw new BadRequestException('Algum dado fornecido não é válido.');
-                    case 'P2009':
-                        throw new BadRequestException('Dados inválidos para criação da task.');
-                    case 'P2025':
-                        throw new NotFoundException('Usuário não encontrado.');
+                        throw new NotFoundException('Usuário informado não encontrado.');
                     default:
                         throw new InternalServerErrorException('Erro ao criar Task: \n' + e.message);
                 }
@@ -35,35 +31,6 @@ export class TaskRepository{
         }
 
     };
-
-
-    async findUserById(id: string){
-        
-        try{
-
-            const user = await this.prisma.users.findFirstOrThrow({
-                where: {id}
-            })
-        
-            return user; 
-
-        }catch( e ){
-
-            if( e instanceof PrismaClientKnownRequestError){
-
-                switch(e.code){
-                    case 'P2025':
-                        throw new NotFoundException('Usuário não encontrado.');
-                    case '2016':
-                        throw new BadRequestException('Dados inválidos, impossível realizar busca.');
-                    default:
-                        throw new InternalServerErrorException('Falha ao comunicar com o servidor')
-                }
-            }
-            
-        throw new InternalServerErrorException('Erro inesperado ao realizar busca por usuários. \n', e.message)
-        }
-    }
 
     async findTaskById(id: string){
         
@@ -82,8 +49,6 @@ export class TaskRepository{
                 switch(e.code){
                     case 'P2025':
                         throw new NotFoundException('Task não encontrada.');
-                    case '2016':
-                        throw new BadRequestException('Dados inválidos, impossível realizar busca.');
                     default:
                         throw new InternalServerErrorException('Falha ao comunicar com o servidor')
                 }
@@ -110,8 +75,11 @@ export class TaskRepository{
                 switch(e.code){
                     case 'P2025':
                         throw new NotFoundException('Task não encontrada.');
-                    case '2016':
-                        throw new BadRequestException('Dados inválidos, impossível realizar busca.');
+                    case 'P2002':
+                        throw new ConflictException('Task já existe.');
+                    case 'P2003':
+                        throw new NotFoundException('Usuário informado não encontrado.');
+
                     default:
                         throw new InternalServerErrorException('Falha ao comunicar com o servidor.')
                 }
@@ -137,6 +105,8 @@ export class TaskRepository{
                 switch(e.code){
                     case 'P2025':
                         throw new NotFoundException('Task não encontrada.');
+                    case 'P2003':
+                            throw new NotFoundException('Usuário informado não encontrado.');
                     default:
                         throw new InternalServerErrorException('Falha ao se comunicar com servidor.')
                 }
@@ -168,14 +138,17 @@ export class TaskRepository{
 
         } catch (e) {
             
-            console.log(e.code,'\n',e.message)
-            throw new InternalServerErrorException('erro.')
-            // if(e instanceof PrismaClientKnownRequestError){
+            if(e instanceof PrismaClientKnownRequestError){
 
-            //     switch(e.code){
-            //         case '':
-            //     }
-            // }
+                switch(e.code){
+                    case 'P2025':
+                        throw new NotFoundException('Nenhuma task encontrada!');
+                    default: 
+                        throw new InternalServerErrorException('Um erro ocorreu ao buscar tasks.');
+                }
+            }
+
+            throw new InternalServerErrorException('Um erro inesperado ocorreu ao efetuar ação.');
         }
     }
 

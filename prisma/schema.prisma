@@ -17,13 +17,13 @@ model users {
   id        String     @id @default(uuid()) @db.Uuid
   password  String
   name      String
-  email     String
+  email     String     @unique
   tasks     Tasks[]
 }
 
 model Tasks {
   id              String      @id @default(uuid()) @db.Uuid
-  tittle          String
+  tittle          String      @unique
   description     String?
   status          TaskStatus @default(PENDING)
   expirationDate  DateTime?

@@ -17,15 +17,6 @@ export class TaskController {
 
     }
 
-    @Get('user/:id')
-    @HttpCode(HttpStatus.OK)
-    async findUser(@Param() user: IdValidator){
-
-        const { id } = user;
-
-        return await this.taskService.findUserById(id);
-
-    }
 
     @Get('task/:id')
     @HttpCode(HttpStatus.OK)
