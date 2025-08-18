@@ -30,14 +30,6 @@ export class TaskService {
     return taskById;
  }
 
- async findUserById( id: string){
-
-    const userById = await this.db.findUserById(id);
-
-    return userById;
-    
- }
-
  async updateTask(id: string, title, description, status){
 
    return await this.db.updateTask(id, title, description, status);
