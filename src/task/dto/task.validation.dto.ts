@@ -3,10 +3,11 @@ import { IsDateString, IsEnum, IsNotEmpty, IsOptional, IsString, IsUUID, Length,
 import { TaskStatus } from '@prisma/client';
 
 
-export class IdValidator{
-    @IsNotEmpty({message: "O campo id não pode estar em branco."})
-    @IsUUID()
-    id: string
+export class TittleValidator{
+    @IsNotEmpty({message: "Deve conter um título."})
+    @Length(1, 100, {message:'O título deve ter entre 1 a 100 caractéres'})
+    tittle: string
+    
 }
 
 export class TaskDto {
@@ -28,9 +29,6 @@ export class TaskDto {
     @IsDateString()
     expirationDate: Date;
 
-    @IsNotEmpty()
-    @IsUUID()
-    userId: string;
 }
 
 
@@ -49,3 +47,18 @@ export class TasksValidator{
    
 }
 
+export class TaskValidatorForUpdate {
+
+    @IsOptional()
+    @Length(1, 100, {message:'O título deve ter entre 1 a 100 caractéres'})
+    tittle: string
+
+    @IsOptional()
+    @MaxLength(255, {message: 'A descrição deve conter até no máximo 255 carácteres'})
+    description: string
+
+    @IsOptional()
+    @Transform(({ value }) => value?.toString().trim().toUpperCase())
+    @IsEnum(TaskStatus, {message: 'Status inválido\nEsperado: "PENDING"/"DONE"'})
+    status: TaskStatus
+}

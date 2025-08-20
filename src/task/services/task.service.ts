@@ -1,13 +1,13 @@
 import { Injectable } from '@nestjs/common';
 import { TaskRepository } from '../repository/task.repository';
 import { Prisma, TaskStatus } from '@prisma/client';
-import { TaskDto } from '../dto/task.validation.dto';
+import { TaskDto, TaskValidatorForUpdate } from '../dto/task.validation.dto';
 
 @Injectable()
 export class TaskService {
  constructor(private readonly db: TaskRepository){}
 
- async createTask(task: TaskDto){
+ async createTask(task: TaskDto, userId: string){
    
     const data: Prisma.TasksCreateInput = {
         tittle: task.tittle,
@@ -15,7 +15,7 @@ export class TaskService {
         expirationDate: new Date(task.expirationDate + 'T00:00:00Z'),
         status: task.status,
         user: {
-            connect: { id: task.userId },
+            connect: { id: userId },
         },
     }
 
@@ -23,22 +23,22 @@ export class TaskService {
     
  }
 
- async findTaskById(id: string){
+ async findTaskById(tittle: string){
 
-    const taskById = await this.db.findTaskById(id);
+    const taskById = await this.db.findTaskByTittle(tittle);
 
     return taskById;
  }
 
- async updateTask(id: string, title, description, status){
+ async updateTask(tittle, task: TaskValidatorForUpdate){
 
-   return await this.db.updateTask(id, title, description, status);
+   return await this.db.updateTask(tittle, task);
    
  }
  
- async deleteTask(id: string){
+ async deleteTask(tittle: string){
 
-   return await this.db.deleteTask(id);
+   return await this.db.deleteTask(tittle);
 
  }
 

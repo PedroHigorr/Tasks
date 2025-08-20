@@ -1,6 +1,6 @@
 import { Body, Controller, Get, HttpCode, HttpStatus, Param, Post } from '@nestjs/common';
 import { UsersService } from './services/users.service';
-import { UserEmailValidation, userValidation } from './dto/user.dto';
+import { userValidation } from './dto/user.dto';
 
 @Controller('users')
 export class UsersController {
@@ -12,15 +12,5 @@ export class UsersController {
         
        return this.usr.createUser(user);
     }
-
-    // @Get('user/:email')
-    // @HttpCode(HttpStatus.OK)
-    // async findUser(@Param() user: UserEmailValidation){
-
-    //     const { email } = user;
-
-    //     return await this.usr.FindUserByEmail(email);
-
-    // }
 
 }

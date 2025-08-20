@@ -2,6 +2,7 @@ import { BadRequestException, ConflictException, Injectable, InternalServerError
 import { Prisma, TaskStatus } from "@prisma/client";
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 import { PrismaService } from "src/shared/prisma/prisma.instance";
+import { TaskValidatorForUpdate } from "../dto/task.validation.dto";
 
 
 @Injectable()
@@ -32,12 +33,12 @@ export class TaskRepository{
 
     };
 
-    async findTaskById(id: string){
+    async findTaskByTittle(tittle: string){
         
         try{
 
             const task = await this.prisma.tasks.findFirstOrThrow({
-                where: {id}
+                where: {tittle}
             })
 
             return task;
@@ -58,13 +59,13 @@ export class TaskRepository{
         }
     }
 
-    async updateTask(id: string, tittle: string, description: string, status: TaskStatus){
+    async updateTask(tittle: string, data: TaskValidatorForUpdate){
 
         try {
             
             const att = await this.prisma.tasks.update({
-                where: {id},
-                data: {tittle, description, status}
+                where: {tittle},
+                data: data
             })
 
             return att;
@@ -89,12 +90,12 @@ export class TaskRepository{
         }
     }
 
-    async deleteTask(id: string){
+    async deleteTask(tittle: string){
 
         try {
 
             const dlt = await this.prisma.tasks.delete({
-                where: {id}
+                where: {tittle}
             })
 
             return dlt;
