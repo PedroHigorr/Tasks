@@ -103,10 +103,10 @@ export class TaskRepository{
         try {
 
             const dlt = await this.prisma.tasks.delete({
-                where: 
-                {
+                where: {
                     tittle: tittle,
                     userId: userId
+                
                 }
             })
 
@@ -134,13 +134,13 @@ export class TaskRepository{
 
         try {
             
-            const words = tittle.split(" ") //separa a frase em palavras usando o espaço em branco como separador
+            const words = tittle.split(" ") 
 
             const find = await this.prisma.tasks.findMany({
                 where: {
                     userId: userId,
                     status: status,
-                    OR: words.map(word => ({ //Cria um array de filtros OR
+                    OR: words.map(word => ({ 
                         tittle:{
                             contains: word,
                             mode: "insensitive"

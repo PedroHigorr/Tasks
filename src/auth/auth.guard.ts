@@ -30,7 +30,6 @@ export class AuthGuard implements CanActivate {
         { secret: this.jwtSecret },
       )
 
-      console.log(payload);
       request['user'] = payload;
       
     }catch(e){
