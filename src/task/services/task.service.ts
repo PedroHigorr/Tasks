@@ -23,28 +23,28 @@ export class TaskService {
     
  }
 
- async findTaskById(tittle: string){
+ async findOneTask(tittle: string, userId: string){
 
-    const taskById = await this.db.findTaskByTittle(tittle);
+    const taskById = await this.db.findTaskByTittle(tittle, userId);
 
     return taskById;
  }
 
- async updateTask(tittle, task: TaskValidatorForUpdate){
+ async updateTask(tittle: string, task: TaskValidatorForUpdate, userId: string){
 
-   return await this.db.updateTask(tittle, task);
+   return await this.db.updateTask(tittle, task, userId);
    
  }
  
- async deleteTask(tittle: string){
+ async deleteTask(tittle: string, userId: string){
 
-   return await this.db.deleteTask(tittle);
+   return await this.db.deleteTask(tittle, userId);
 
  }
 
- async findMany(description: string, tittle: TaskStatus){
+ async findMany(description: string, tittle: TaskStatus, userId: string){
 
-   return await this.db.findAllTasks(description, tittle);
+   return await this.db.findAllTasks(description, tittle, userId);
 
  }
 

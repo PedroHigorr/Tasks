@@ -33,12 +33,16 @@ export class TaskRepository{
 
     };
 
-    async findTaskByTittle(tittle: string){
+    async findTaskByTittle(tittle: string, userId: string){
         
         try{
 
             const task = await this.prisma.tasks.findFirstOrThrow({
-                where: {tittle}
+                where: 
+                {
+                    tittle: tittle,
+                    userId: userId
+                }
             })
 
             return task;
@@ -59,12 +63,16 @@ export class TaskRepository{
         }
     }
 
-    async updateTask(tittle: string, data: TaskValidatorForUpdate){
+    async updateTask(tittle: string, data: TaskValidatorForUpdate, userId: string){
 
         try {
             
             const att = await this.prisma.tasks.update({
-                where: {tittle},
+                where: 
+                {
+                    tittle: tittle, 
+                    userId: userId
+                },
                 data: data
             })
 
@@ -90,12 +98,16 @@ export class TaskRepository{
         }
     }
 
-    async deleteTask(tittle: string){
+    async deleteTask(tittle: string, userId: string){
 
         try {
 
             const dlt = await this.prisma.tasks.delete({
-                where: {tittle}
+                where: 
+                {
+                    tittle: tittle,
+                    userId: userId
+                }
             })
 
             return dlt;
@@ -118,14 +130,15 @@ export class TaskRepository{
         }
     }
 
-    async findAllTasks(tittle: string, status: TaskStatus){
+    async findAllTasks(tittle: string, status: TaskStatus, userId: string){
 
         try {
             
             const words = tittle.split(" ") //separa a frase em palavras usando o espaço em branco como separador
 
             const find = await this.prisma.tasks.findMany({
-                where: { 
+                where: {
+                    userId: userId,
                     status: status,
                     OR: words.map(word => ({ //Cria um array de filtros OR
                         tittle:{

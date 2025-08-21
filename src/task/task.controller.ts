@@ -25,42 +25,48 @@ export class TaskController {
 
     @Get('task/:tittle')
     @HttpCode(HttpStatus.OK)
-    async findTask(@Param() identification: TittleValidator){
+    async findTask(@Param() identification: TittleValidator, @Req() request: Request){
         
+        const usr = request.user['sub'];
         const { tittle } = identification;
 
-        return await this.taskService.findTaskById(tittle);
+        return await this.taskService.findOneTask(tittle, usr);
     }
 
     @Get('/all')
     @HttpCode(HttpStatus.OK)
-    async findAll(@Query() tasks: TasksValidator){
+    async findAll(@Query() tasks: TasksValidator, @Req() resquest: Request){
 
+        const usr = resquest.user['sub'];
         const {tittle, status} = tasks
 
-        const find = await this.taskService.findMany(tittle, status)
+        const find = await this.taskService.findMany(tittle, status, usr)
 
         return {message: "Tasks encontradas: \n", find}
     }
 
     @Put('Task/:identificator')
     @HttpCode(HttpStatus.OK)
-    async updateTask(@Param() identificator: TittleValidator, @Body() task: TaskValidatorForUpdate){
+    async updateTask(@Param() identificator: TittleValidator, @Body() task: TaskValidatorForUpdate, @Req() request: Request){
+
+        const usr = request.user['sub'];
 
         const { tittle } = identificator;
 
-        const att = await this.taskService.updateTask(tittle, task);
+        const att = await this.taskService.updateTask(tittle, task, usr);
 
         return {message: "Atualizações realizadas com sucesso!\n\n", att}
     }
 
     @Delete('task/:tittle')
     @HttpCode(HttpStatus.OK)
-    async deleteTasks(@Param() identification: TittleValidator){
+    async deleteTasks(@Param() identification: TittleValidator, @Req() request: Request){
+
+        const usr = request.user['sub'];
 
         const { tittle } = identification;
         
-        const del = await this.taskService.deleteTask(tittle);
+        const del = await this.taskService.deleteTask(tittle, usr);
 
         return {message: "Task deletada com sucesso.\n\n", del};
     }
