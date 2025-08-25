@@ -1,4 +1,4 @@
-import { BadRequestException, ConflictException, Injectable, InternalServerErrorException, NotFoundException } from "@nestjs/common";
+import { ConflictException, Injectable, InternalServerErrorException, NotFoundException } from "@nestjs/common";
 import { Prisma, TaskStatus } from "@prisma/client";
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 import { PrismaService } from "src/shared/prisma/prisma.instance";
@@ -125,7 +125,7 @@ export class TaskRepository{
                 }
             }
             console.log(e.code,'\n',e.message)
-        throw new InternalServerErrorException('falha ao se comunicar com servidor.')
+        throw new InternalServerErrorException('Erro inesperado ao realizar busca por Task.')
         
         }
     }
@@ -162,7 +162,7 @@ export class TaskRepository{
                 }
             }
 
-            throw new InternalServerErrorException('Um erro inesperado ocorreu ao efetuar ação.');
+            throw new InternalServerErrorException('Um erro inesperado ocorreu ao buscar tasks.');
         }
     }
 
