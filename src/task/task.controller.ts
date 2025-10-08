@@ -1,7 +1,7 @@
 import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, Post, Put, Query, Req, UseGuards } from '@nestjs/common';
 
 import { TaskService } from './services/task.service';
-import { TaskDto, TasksValidator, TaskValidatorForUpdate, TittleValidator } from './dto/task.validation.dto';
+import { TaskDto, TasksValidator, TaskValidatorForUpdate, TittleValidator, UuidValidator } from './dto/task.validation.dto';
 import { AuthGuard } from 'src/auth/auth.guard';
 import { Request } from 'express';
 import { ApiBearerAuth, ApiBody, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
@@ -37,22 +37,22 @@ export class TaskController {
 
     }
 
-    @Get('task/:tittle')
+    @Get('/:id')
     @HttpCode(HttpStatus.OK)
     // --- DECORATORS DE DOCUMENTAÇÃO PARA ESTA ROTA --- \\
-    @ApiOperation({summary: "Buscar uma task por título."})
+    @ApiOperation({summary: "Buscar uma task por ID."})
     @ApiResponse({status: 404, description: 'Task não encontrada.'})
     @ApiResponse({status: 500, description: 'Falha ao comunicar com o servidor'})
     @ApiResponse({status: 500, description: 'Erro inesperado ao realizar busca por Task.'})
     @ApiResponse({status: 401, description: 'Não autorizado. Token inválido ou expirado.' })
     @ApiResponse({status: 403, description: 'Acesso negado. A tarefa não pertence ao usuário.' })
     // --- FIM DOS DECORATORS PARA DOCUMENTAÇÃO DESTA ROTA --- \\
-    async findTask(@Param() identification: TittleValidator, @Req() request: Request){
+    async findTask(@Param() identification: UuidValidator, @Req() request: Request){
         
         const usr = request.user['sub'];
-        const { tittle } = identification;
+        const { id } = identification;
 
-        return await this.taskService.findOneTask(tittle, usr);
+        return await this.taskService.findOneTask(id, usr);
     }
 
     @Get('/all')
@@ -87,21 +87,21 @@ export class TaskController {
     @ApiResponse({status: 403, description: 'Acesso negado. A tarefa não pertence ao usuário.' })
     // --- FIM DOS DECORATORS PARA DOCUMENTAÇÃO DESTA ROTA --- \\
     @HttpCode(HttpStatus.OK)
-    async updateTask(@Param() identificator: TittleValidator, @Body() task: TaskValidatorForUpdate, @Req() request: Request){
+    async updateTask(@Param() identificator: UuidValidator, @Body() task: TaskValidatorForUpdate, @Req() request: Request){
 
         const usr = request.user['sub'];
 
-        const { tittle } = identificator;
+        const { id } = identificator;
 
-        const att = await this.taskService.updateTask(tittle, task, usr);
+        const att = await this.taskService.updateTask(id, task, usr);
 
         return {message: "Atualizações realizadas com sucesso!\n\n", att}
     }
 
-    @Delete('task/:tittle')
+    @Delete('Task/:tittle')
     @HttpCode(HttpStatus.OK)
     // --- DECORATORS DE DOCUMENTAÇÃO PARA ESTA ROTA --- \\
-    @ApiOperation({summary: "Deleta determinada task."})
+    @ApiOperation({summary: "Deleta determinada task, pelo id + userId."})
     @ApiResponse({status: 404, description: 'Task não encontrada.'})
     @ApiResponse({status: 400, description: 'Usuário informado não encontrado.'})
     @ApiResponse({status: 500, description: 'Falha ao comunicar com o servidor.'})
@@ -109,13 +109,13 @@ export class TaskController {
     @ApiResponse({status: 401, description: 'Não autorizado. Token inválido ou expirado.' })
     @ApiResponse({status: 403, description: 'Acesso negado. A tarefa não pertence ao usuário.' })
     // --- FIM DOS DECORATORS PARA DOCUMENTAÇÃO DESTA ROTA --- \\
-    async deleteTasks(@Param() identification: TittleValidator, @Req() request: Request){
+    async deleteTasks(@Param() identification: UuidValidator, @Req() request: Request){
 
         const usr = request.user['sub'];
 
-        const { tittle } = identification;
+        const { id } = identification;
         
-        const del = await this.taskService.deleteTask(tittle, usr);
+        const del = await this.taskService.deleteTask(id, usr);
 
         return {message: "Task deletada com sucesso.\n\n", del};
     }

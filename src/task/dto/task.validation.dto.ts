@@ -10,6 +10,13 @@ export class TittleValidator{
     
 }
 
+export class UuidValidator{
+
+    @IsNotEmpty()
+    @IsUUID('all')
+    id: string
+}
+
 export class TaskDto {
 
     @IsNotEmpty()
@@ -33,6 +40,8 @@ export class TaskDto {
 
 
 export class TasksValidator{
+
+
     @IsNotEmpty({message: "Deve conter um título."})
     @Length(1, 100, {message:'O título deve ter entre 1 a 100 caractéres'})
     tittle: string

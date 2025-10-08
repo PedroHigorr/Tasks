@@ -33,15 +33,15 @@ export class TaskRepository{
 
     };
 
-    async findTaskByTittle(tittle: string, userId: string){
+    async findTaskByTittle(id: string, userId: string){
         
         try{
 
             const task = await this.prisma.tasks.findFirstOrThrow({
                 where: 
                 {
-                    tittle: tittle,
-                    userId: userId
+                    id,
+                    userId
                 }
             })
 
@@ -63,15 +63,15 @@ export class TaskRepository{
         }
     }
 
-    async updateTask(tittle: string, data: TaskValidatorForUpdate, userId: string){
+    async updateTask(id: string, data: TaskValidatorForUpdate, userId: string){
 
         try {
             
             const att = await this.prisma.tasks.update({
                 where: 
                 {
-                    tittle: tittle, 
-                    userId: userId
+                    id, 
+                    userId
                 },
                 data: data
             })
@@ -98,15 +98,14 @@ export class TaskRepository{
         }
     }
 
-    async deleteTask(tittle: string, userId: string){
+    async deleteTask(id: string, userId: string){
 
         try {
 
             const dlt = await this.prisma.tasks.delete({
                 where: {
-                    tittle: tittle,
-                    userId: userId
-                
+                    id,
+                    userId
                 }
             })
 
