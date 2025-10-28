@@ -2,7 +2,7 @@
   
   <a href="https://www.linkedin.com/in/pedrohigor1287/" target="_blank">
     
-    <img src="assets/pedro.higor.logo.svg" width="120" alt="Pedro Higor Logo" />
+    <img src="https://raw.githubusercontent.com/PedroHigorr/Tasks/master/assets/pedro.higor.logo.svg" width="120" alt="Pedro Higor Logo" />
 
   </a>
 </p>
