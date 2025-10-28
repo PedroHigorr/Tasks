@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 210 297"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.4.2 (f4327f4, 2025-05-13)"
+   sodipodi:docname="Kalisto-Logo.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#505050"
+     bordercolor="#ffffff"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="1"
+     inkscape:deskcolor="#505050"
+     inkscape:document-units="mm"
+     showguides="true"
+     inkscape:zoom="0.70710678"
+     inkscape:cx="377.59502"
+     inkscape:cy="557.90725"
+     inkscape:window-width="1920"
+     inkscape:window-height="1009"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="Camada 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       style="fill:#5bc2e7;fill-opacity:1;stroke-width:9.21176;stroke-linecap:round"
+       d="m 102.30483,135.5347 -24.650694,49.19347 24.649904,49.17523 24.64843,-49.17617 z"
+       id="path18" />
+    <path
+       style="fill:#5bc2e7;fill-opacity:1;stroke-width:9.21176;stroke-linecap:round"
+       d="m 130.48295,82.954604 -24.65069,49.193466 24.6499,49.17523 24.64843,-49.17617 z"
+       id="path22" />
+    <path
+       style="fill:#5bc2e7;fill-opacity:1;stroke-width:9.21176;stroke-linecap:round"
+       d="m 73.795083,82.963033 -24.65069,49.193467 24.6499,49.17523 24.64843,-49.17617 z"
+       id="path23" />
+    <path
+       style="fill:#5bc2e7;fill-opacity:1;stroke-width:9.21176;stroke-linecap:round"
+       d="M 102.29687,29.325968 77.646183,78.519441 102.29608,127.69467 126.94451,78.518501 Z"
+       id="path24" />
+  </g>
+</svg>

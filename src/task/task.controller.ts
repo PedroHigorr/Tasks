@@ -75,7 +75,7 @@ export class TaskController {
         return {message: "Tasks encontradas: \n", find}
     }
 
-    @Put('Task/:identificator')
+    @Put(':identificator')
     // --- DECORATORS DE DOCUMENTAÇÃO PARA ESTA ROTA --- \\
     @ApiOperation({summary: "Atualiza determinada task."})
     @ApiResponse({status: 404, description: 'Task não encontrada.'})
@@ -98,7 +98,7 @@ export class TaskController {
         return {message: "Atualizações realizadas com sucesso!\n\n", att}
     }
 
-    @Delete('Task/:tittle')
+    @Delete(':identificator')
     @HttpCode(HttpStatus.OK)
     // --- DECORATORS DE DOCUMENTAÇÃO PARA ESTA ROTA --- \\
     @ApiOperation({summary: "Deleta determinada task, pelo id + userId."})
