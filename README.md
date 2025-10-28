@@ -10,7 +10,7 @@ API robusta para gerenciamento de tarefas, desenvolvida com NestJS, TypeScript e
 
 ## Status do Projeto
 
-🚧 🟢 Concluído 🚧 
+🚧 🟢 Concluído 🟢 🚧 
 
 ---
 
@@ -59,7 +59,7 @@ Este projeto usa Prisma. Você precisa criar um arquivo `.env` na raiz do projet
 `npx prisma migrate dev`
 
 **6. Inicie o servidor:**
-`npm run start:dev`
+`nest start`
 
 
 
