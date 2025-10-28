@@ -70,5 +70,5 @@ O servidor estará rodando em `http://localhost:3000` (ou qual for a sua porta).
 ## 👨‍💻 Autor
 
 **Pedro Higor**
-* LinkedIn: [Pedro Higot](https://www.linkedin.com/in/pedrohigor1287/)
+* LinkedIn: [Pedro Higor](https://www.linkedin.com/in/pedrohigor1287/)
 * Email: (pedro.higor92@gmail.com)
